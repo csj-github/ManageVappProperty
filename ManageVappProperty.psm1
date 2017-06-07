@@ -50,32 +50,6 @@ function  Get-VMOVFProperty {
 }
 
 ###############################################
-#### Clear ALL VM OVF Property             ####
-###############################################
-
-function  Clear-VMOVFProperty {
-    param(
-        [parameter(
-            Position=0,
-            Mandatory=$true,
-            ValueFromPipeline=$True,
-            ValueFromPipelineByPropertyName=$True)
-        ][Alias('VMName')] [string]$VM
-    )
-
-    process {
-        foreach ($VMInstance in $VM) {
-            $VMobj = Get-VM $VMInstance
-
-            $Spec = New-Object VMware.Vim.VirtualMachineConfigSpec
-            $Spec.VAppConfigRemoved = $true
-
-            $VMObj.ExtensionData.ReconfigVM($Spec)
-        }
-    }
-}
-
-###############################################
 #### Create New VM OVF Property            ####
 ###############################################
 
